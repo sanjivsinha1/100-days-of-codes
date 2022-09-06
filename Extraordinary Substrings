@@ -1,0 +1,42 @@
+s = input()
+substrings = []
+res = [s[i: j] for i in range(len(s))
+       for j in range(i + 1, len(s) + 1)]
+# print(res)
+mapVal = {
+    'a': 1,
+    'b': 1,
+    'c': 2,
+    'd': 2,
+    'e': 2,
+    'f': 3,
+    'g': 3,
+    'h': 3,
+    'i': 4,
+    'j': 4,
+    'k': 4,
+    'l': 5,
+    'm': 5,
+    'n': 5,
+    'o': 6,
+    'p': 6,
+    'q': 6,
+    'r': 7,
+    's': 7,
+    't': 7,
+    'u': 8,
+    'v': 8,
+    'w': 8,
+    'x': 9,
+    'y': 9,
+    'z': 9
+}
+count = 0
+for a in res:
+    sumVal = 0
+    for i in a:
+        sumVal += mapVal[i]
+    if sumVal % len(a) == 0:
+        count += 1
+
+print(count, end="\n")
