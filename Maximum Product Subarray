@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class Solution{
+public:
+
+	long long maxProduct(vector<int> arr, int n) {
+	    // code here
+	    long long maxi,mini,pro;
+	    maxi=mini=pro=arr[0];
+	    for(int i=1;i<n;i++){
+	        if(arr[i]<0)
+	        swap(mini,maxi);
+	        maxi=max(arr[i]*1ll,(maxi*arr[i]));
+	        mini=min(arr[i]*1ll,(mini*arr[i]));
+	        pro=max(pro,maxi);
+	    }
+	    return pro;
+	}
+};
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, i;
+        cin >> n;
+        vector<int> arr(n);
+        for (i = 0; i < n; i++) {
+            cin >> arr[i];
+        }
+        Solution ob;
+        auto ans = ob.maxProduct(arr, n);
+        cout << ans << "\n";
+    }
+    return 0;
+}
