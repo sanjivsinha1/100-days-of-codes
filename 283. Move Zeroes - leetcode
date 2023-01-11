@@ -1,0 +1,18 @@
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> p;
+        for(int i=0;i<n;i++){
+            if(nums[i]==0){
+                p.push_back(i);
+            }
+        }
+        for(int i=0;i<p.size();i++){
+            nums.erase(nums.begin()+p[i]-i);
+        }
+        for(int i=0;i<p.size();i++){
+            nums.push_back(0);
+        }
+    }
+};
