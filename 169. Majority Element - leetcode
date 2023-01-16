@@ -1,0 +1,10 @@
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+//given the condition, if any element appear more than n/2 times are called majority
+//then we know our mid element means (n-1/2) is also our majority element if satisfied the given condition.
+//simply return mid element.
+        return nums[(nums.size()-1)/2];
+    }
+};
