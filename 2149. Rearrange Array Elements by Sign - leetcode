@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> ans(n,0);
+        int pos1=0;
+        int pos2=1;
+        for(int x:nums){
+            if(x>0){
+                ans[pos1]=x;
+                pos1+=2;
+            }
+            else{
+                ans[pos2]=x;
+                pos2+=2;
+            }
+        }
+        return ans;
+    }
+};
