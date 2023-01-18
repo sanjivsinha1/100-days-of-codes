@@ -1,0 +1,47 @@
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int n = nums.size(),k,l;
+         
+        // finding first element from the last which is smaller than
+        // element next to it
+        for(k=n-2 ; k>=0 ; k--)
+            if(nums[k] < nums[k+1]) break;
+
+        // if we dont find any such element that means the vector 
+        // is already sorted in descending order
+
+        // i.e. It is already the biggest number that can be formed
+        // using all the integers
+
+        // In this case the next Premutation will be the smallest
+        // permutation that can be formed using the numbers of
+        // array i.e. all the array elements in ascending order
+        // which is nothing but the reverse of the current order
+ 
+        if(k<0)
+            reverse(nums.begin() ,nums.end());
+
+        // After finding the index "k" of the number which is 
+        // smaller than the number next to it ,
+        // we will again traverse from the right to 
+        // left and will find the first element which is greater
+        // the element at index k ....which is indeed the smallest 
+        // of all the numbers right to the index k
+
+        // we will then swap both the characters 
+        // after swapping we will just reverse the digits after the
+        // index k as that is in descending order and reversing it
+        // will make it in increasing order and will make the whole
+        // number smallest possible number greater than 
+        // the original number 
+        else{
+            for(l = n-1; l >k ;l--)
+                if(nums[l] > nums[k]) break;
+            swap(nums[k], nums[l]); 
+            reverse(nums.begin()+k+1 ,  nums.end());
+        }
+
+        
+    }
+};
