@@ -1,0 +1,93 @@
+//{ Driver Code Starts
+//Initial template for C++
+
+#include<bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+//User function template for C++
+
+class Solution 
+{
+    public:
+    //Function to find if there is a celebrity in the party or not.
+    int celebrity(vector<vector<int> >& M, int n) 
+    {
+        stack<int> s;
+        //step 1 - put all element into the stack
+        for(int i=0;i<n;i++){
+            s.push(i);
+        }
+        
+        //step 2 - get 2 element from the stack and compare them
+        
+        while(s.size()>1){
+            int a=s.top();
+            s.pop();
+            int b=s.top();
+            s.pop();
+            
+            if(M[a][b]==1){
+                s.push(b);
+            }
+            else{
+                s.push(a);
+            }
+        }
+        int candidate = s.top(); //potential candidate
+        
+        //step 3 - verify that the potential celeb is the celebrity or not
+        
+        //check all element of row candidate are zero
+        int rowcount=0;
+        for(int i=0;i<n;i++){
+            if(M[candidate][i]==0)
+            rowcount++;
+        }
+        if(rowcount!=n){
+            return -1;
+        }
+        
+        //ckeck all element of candidate are 1 except the diagonal element
+        
+        int colcount=0;
+        for(int i=0;i<n;i++){
+            if(M[i][candidate]==1){
+                colcount++;
+            }
+        }
+        if(colcount!=n-1){
+            return -1;
+        }
+        
+        //reached here means he is the celebrity
+        return candidate;
+        
+    }
+};
+
+//{ Driver Code Starts.
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        vector<vector<int> > M( n , vector<int> (n, 0));
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                cin>>M[i][j];
+            }
+        }
+        Solution ob;
+        cout<<ob.celebrity(M,n)<<endl;
+
+    }
+}
+
+// } Driver Code Ends
