@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int longestOnes(vector<int>& nums, int k) {
+        //i - denote start point of sub string, j- used to traverse and denote end point of the sub string, zerocount- to store number of zero occured in max substring.
+        int i=0,j=0,n=nums.size(),zerocount=0,ans=INT_MIN;
+        //used to traverse whole string
+        while(j<n){
+            if(nums[j]==0){
+                zerocount++;
+            }
+            //when ever number of zero we get gets greater then we can change we shift our start point until we get no of zero we can change 
+            while(zerocount>k){
+                if(nums[i]==0){
+                    zerocount--;
+                }
+                i++;
+            }
+            //storing the max length of substring
+            ans=max(ans,j-i+1);
+            j++;
+        }
+        return ans;
+    }
+};
