@@ -1,50 +1,81 @@
- void traverseleft(Node* root,vector<int>&ans){
-        if((root==NULL) || (root->left==NULL && root->right==NULL)){
+/* A binary tree Node
+struct Node
+{
+    int data;
+    Node* left, * right;
+}; */
+
+// Approch 
+// 1. print all the left boundary node of the tree
+// 2. print all the leaf node of the tree
+// 3. print all the right boundary node of the tree
+class Solution {
+public:
+    // function to add all the Left bounary node of the tree excluding the leaf node
+    void traverseLeft(Node* root, vector<int>& ans){
+        //checking if we are on the leaf Node or not and even the root is NULL node or not
+        if((root==NULL)||(root->left==NULL && root->right==NULL)){
             return;
         }
+        
         ans.push_back(root->data);
+        //we check if the left node is present or not, if it is not present there might be right node for the parent node which can be a boundary Node 
         if(root->left){
-            traverseleft(root->left,ans);
+            traverseLeft(root->left,ans);
         }
         else{
-            traverseleft(root->right,ans);
+            traverseLeft(root->right,ans);
         }
     }
-    void traverseleaf(Node* root,vector<int>&ans){
+    
+    //function to add all the leaf node of the tree
+    void traverseLeaf(Node* root,vector<int>& ans){
         if(root==NULL){
             return;
         }
+        //this will checek if the Node is the leaf Node or not, if its a Leaf node we add the value
         if(root->left==NULL && root->right==NULL){
             ans.push_back(root->data);
-            return;
         }
-        traverseleaf(root->left,ans);
-        traverseleaf(root->right,ans);
+        
+        traverseLeaf(root->left,ans);
+        traverseLeaf(root->right,ans);
     }
-    void traverseright(Node* root,vector<int>&ans){
-        if((root==NULL) || (root->left==NULL && root->right==NULL)){
+    
+    // function to add all the Right Boundary ndoe of the tree in reverse oreder excluding the Leaf node
+    // To add the value in reverse order we use Inorder traversal
+    void traverseRight(Node* root,vector<int> &ans){
+        if((root==NULL)||(root->left==NULL && root->right==NULL)){
             return;
         }
+        //we check if the right node is present or not, if it is not present there might be left node for the parent node which can be a boundary Node 
         if(root->right){
-            traverseright(root->right,ans);
+            traverseRight(root->right,ans);
         }
         else{
-            traverseright(root->left,ans);
+            traverseRight(root->left,ans);
         }
         ans.push_back(root->data);
     }
     vector <int> boundary(Node *root)
     {
         //Your code here
-        vector<int>ans;
+        vector<int> ans;
         if(root==NULL){
             return ans;
         }
-        ans.push_back(root->data);
-        traverseleft(root->left,ans);
-        traverseleaf(root->left,ans);
-        traverseleaf(root->right,ans);
-        traverseright(root->right,ans);
-        return ans;
+        
+        ans.push_back(root->data);  // adding the root
+        
+        traverseLeft(root->left,ans);  // call to function to store all the left boundary node of the tree
+        
+        // Traverse Leaf Node
+        // leaft Subtree
+        traverseLeaf(root->left,ans);
+        // Right subtree
+        traverseLeaf(root->right,ans);
+        
+        // Traverse right boundary Node 
+        traverseRight(root->right,ans);
     }
 };
