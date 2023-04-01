@@ -1,0 +1,47 @@
+class Solution
+{
+    public:
+    //Function to return a list of nodes visible from the top view 
+    //from left to right in Binary Tree.
+    vector<int> topView(Node *root)
+    {
+        //Your code here
+        vector<int> ans;
+        if(root==NULL) return ans;
+        //map<verticle order,value>
+        map<int,int> mpp;
+        //queue<pair<node,verticle order>>
+        queue<pair<Node*,int>>q;
+        
+        q.push({root,0});
+        
+        while(!q.empty()){
+            auto it=q.front(); //auto while take any data type given to it
+            q.pop();
+            Node* node=it.first; // assigning the root on which we are
+            int line=it.second;  // verticle level of that node 
+            
+            //this will check if we have a value present for that verticle level or not 
+            // if its not present we will add the value
+            if(mpp.find(line)==mpp.end()){
+                mpp[line]=node->data;
+            }
+            //is left node present or not
+            if(node->left!=NULL){
+                q.push({node->left,line-1});
+            }
+            //is right node present or not
+            if(node->right!=NULL){
+                q.push({node->right,line+1});
+            }
+        }
+        //transver the map value to vector
+        for(auto it:mpp){
+            ans.push_back(it.second);
+        }
+        return ans;
+        
+    }
+
+};
+
