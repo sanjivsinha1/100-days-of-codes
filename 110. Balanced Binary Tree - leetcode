@@ -32,7 +32,8 @@ public:
 
         //if the tree is balanced it will return the height of the tree as an indicator
         return max(left,right)+1;
-    }
+    } 
+    //function will check and return if the tree is balanced or not
     bool isBalanced(TreeNode* root) {
         return height(root)!=-1;
     }
