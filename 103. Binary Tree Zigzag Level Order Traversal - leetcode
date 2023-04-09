@@ -43,7 +43,7 @@ public:
             flag=!flag;
             //pusshing the temp vector
             ans.push_back(temp);
-        }
+        }//Output 
         return ans;
     }
 };
