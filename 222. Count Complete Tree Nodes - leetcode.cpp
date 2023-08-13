@@ -38,7 +38,7 @@ public:
         
         int leftheight = findleftheight(root);
         int rightheight =findrightheight(root);
-        
+        //formula for complete binary tree number of nodes
         if(leftheight == rightheight) return pow(2,leftheight) -1;
         
         int left = countNodes(root->left);
